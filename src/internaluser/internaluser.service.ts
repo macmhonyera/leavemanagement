@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateInternaluserDto } from './dto/create-internaluser.dto';
 import { UpdateInternaluserDto } from './dto/update-internaluser.dto';
+import { InternalUsersDto } from './dto/internal-user.dto.ts';
 
 @Injectable()
 export class InternaluserService {
-  create(createInternaluserDto: CreateInternaluserDto) {
+  create(createInternaluserDto: InternalUsersDto) {
     return 'This action adds a new internaluser';
   }
 

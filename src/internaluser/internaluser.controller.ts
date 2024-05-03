@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { InternaluserService } from './internaluser.service';
-import { CreateInternaluserDto } from './dto/create-internaluser.dto';
 import { UpdateInternaluserDto } from './dto/update-internaluser.dto';
+import { InternalUsersDto } from './dto/internal-user.dto.ts';
 
 @Controller('internaluser')
 export class InternaluserController {
   constructor(private readonly internaluserService: InternaluserService) {}
 
   @Post()
-  create(@Body() createInternaluserDto: CreateInternaluserDto) {
+  create(@Body() createInternaluserDto: InternalUsersDto) {
     return this.internaluserService.create(createInternaluserDto);
   }
 
