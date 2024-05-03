@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { InternaluserModule } from './internaluser/internaluser.module';
 @Module({
   imports: [
    TypeOrmModule.forRootAsync({
@@ -18,7 +19,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         synchronize: true,
         logging: true,
     })
-   })
+   }),
+   InternaluserModule
   ],
   controllers: [],
   providers: [],
