@@ -2,14 +2,16 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { InternaluserService } from './internaluser.service';
 import { UpdateInternaluserDto } from './dto/update-internaluser.dto';
 import { InternalUsersDto } from './dto/internal-user.dto.ts';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('internaluser')
+@ApiTags('Internal Users')
 export class InternaluserController {
   constructor(private readonly internaluserService: InternaluserService) {}
 
   @Post()
   create(@Body() createInternaluserDto: InternalUsersDto) {
-    return this.internaluserService.create(createInternaluserDto);
+    return this.internaluserService.signup(createInternaluserDto);
   }
 
   @Get()
