@@ -3,34 +3,33 @@ import { InternaluserService } from './internaluser.service';
 import { UpdateInternaluserDto } from './dto/update-internaluser.dto';
 import { InternalUsersDto } from './dto/internal-user.dto.ts';
 import { ApiTags } from '@nestjs/swagger';
+import { InternalSigninDto } from './dto/internal-signin.dto';
+import { GetCurrentUserId } from 'src/decorators/get-current-user-id.decorator';
+import { InternalUser } from './entities/internaluser.entity';
+import { GetCurrentUser } from 'src/decorators/get-current-user.decorator';
 
 @Controller('internaluser')
 @ApiTags('Internal Users')
 export class InternaluserController {
-  constructor(private readonly internaluserService: InternaluserService) {}
+  constructor(private readonly internaluserService: InternaluserService) { }
 
-  @Post()
-  create(@Body() createInternaluserDto: InternalUsersDto) {
-    return this.internaluserService.signup(createInternaluserDto);
+  @Post('/signup')
+  async signUp(@Body() createInternaluserDto: InternalUsersDto) {
+    return await this.internaluserService.signup(createInternaluserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.internaluserService.findAll();
+  @Post('/signin')
+  async signIn(@Body() internalSigninDto: InternalSigninDto): Promise<any> {
+    return this.internaluserService.signIn(internalSigninDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.internaluserService.findOne(+id);
+  @Post('/logout')
+  async logout(@GetCurrentUserId() userId: string) {
+    return this.internaluserService.logout(userId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInternaluserDto: UpdateInternaluserDto) {
-    return this.internaluserService.update(+id, updateInternaluserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.internaluserService.remove(+id);
+  @Get('/:id')
+  getUserById(@Param('id') id: string): Promise<InternalUser> {
+    return this.internaluserService.getUserById(id);
   }
 }

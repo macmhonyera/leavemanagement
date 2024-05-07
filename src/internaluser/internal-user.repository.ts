@@ -1,9 +1,9 @@
 import * as bcrypt from 'bcrypt';
 import { ConflictException, InternalServerErrorException } from "@nestjs/common";
-import { CustomRepository } from 'src/database/typeorm-ex.decorator';
 import { InternalUser } from './entities/internaluser.entity';
 import { Repository } from 'typeorm';
 import { InternalUsersDto } from './dto/internal-user.dto.ts';
+import { CustomRepository } from 'src/database/typeorm-ex.decorator';
 
 @CustomRepository(InternalUser)
 export class InternalUserRepository extends Repository <InternalUser> {
